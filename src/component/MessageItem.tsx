@@ -1,10 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native';
-import { Message } from './MessageList';
-
-type MessageItemProps = {
-  message: Message;
-  isOwnMessage: boolean;
-};
+import { MessageItemProps } from '../types/types';
 
 export const MessageItem = ({ message, isOwnMessage }: MessageItemProps) => {
   return (

@@ -4,17 +4,7 @@ import { StyleSheet, KeyboardAvoidingView, Platform } from 'react-native';
 import { socket } from '../socket';
 import MessageList from '../component/MessageList';
 import ChatInput from '../component/ChatInput';
-
-type ChatScreenProps = {
-  username: string;
-};
-
-type Message = {
-  id: number;
-  text: string;
-  username: string;
-  timestamp: string;
-};
+import { ChatScreenProps, Message } from '../types/types';
 
 export default function ChatScreen({ username }: ChatScreenProps) {
   const [messages, setMessages] = useState<Message[]>([]);
