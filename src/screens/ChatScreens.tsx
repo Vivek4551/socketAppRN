@@ -53,16 +53,19 @@ export default function ChatScreen({ username }: ChatScreenProps) {
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
       keyboardVerticalOffset={100}
     >
-      <MessageList messages={messages} ref={listRef} />
+      <MessageList
+        messages={messages}
+        currentUsername={username}
+        ref={listRef}
+      />
       <ChatInput />
     </KeyboardAvoidingView>
   );
 }
 
 const styles = StyleSheet.create({
- container: {
+  container: {
     flex: 1,
-    paddingTop: 24,
-    paddingBottom: 24,
+    paddingTop: 34,
   },
 });

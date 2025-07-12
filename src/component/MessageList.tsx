@@ -1,7 +1,8 @@
 import React, { forwardRef } from 'react';
-import { FlatList, Text, View, StyleSheet } from 'react-native';
+import { FlatList } from 'react-native';
+import { MessageItem } from './MessageItem';
 
-type Message = {
+export type Message = {
   id: number;
   text: string;
   username: string;
@@ -10,27 +11,25 @@ type Message = {
 
 type MessageListProps = {
   messages: Message[];
+  currentUsername: string;
 };
 
-const MessageList = forwardRef<any, MessageListProps>(({ messages }, ref) => (
-  <FlatList
-    data={messages}
-    ref={ref}
-    keyExtractor={item => item.id.toString()}
-    renderItem={({ item }) => (
-      <View style={styles.message}>
-        <Text style={styles.meta}>
-          [{new Date(item.timestamp).toLocaleTimeString()}] {item.username}:
-        </Text>
-        <Text>{item.text}</Text>
-      </View>
-    )}
-  />
-));
+const MessageList = forwardRef<any, MessageListProps>(
+  ({ messages, currentUsername }, ref) => {
+    return (
+      <FlatList
+        ref={ref}
+        data={messages}
+        keyExtractor={item => item.id.toString()}
+        renderItem={({ item }) => (
+          <MessageItem
+            message={item}
+            isOwnMessage={item.username === currentUsername}
+          />
+        )}
+      />
+    );
+  },
+);
 
 export default MessageList;
-
-const styles = StyleSheet.create({
-  message: { padding: 10, borderBottomWidth: 1, borderColor: '#ccc' },
-  meta: { fontWeight: 'bold' },
-});
